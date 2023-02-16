@@ -14,7 +14,7 @@ void usage(void)
     my_putstr("\t./my_radar [OPTIONS] path_to_script\n");
     my_putstr("\tpath_to_script\t\tthe path to the script file\n\n");
     my_putstr("OPTIONS\n");
-    my_putstr("\t-h\t\tprint the usage and quit.\n");
+    my_putstr("\t-h\t\tprint the usage.\n");
     my_putstr("USER INTERACTIONS\n");
     my_putstr("\t'L' Key \tenable/disable hitboxes an areas.\n");
     my_putstr("\t'S' Key \tenable/disable sprites.\n");
