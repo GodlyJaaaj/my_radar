@@ -11,7 +11,9 @@ sfRenderWindow *init_window(void)
 {
     sfRenderWindow *window;
     sfVideoMode mode = sfVideoMode_getDesktopMode();
-    window = sfRenderWindow_create(mode, "My_Radar",  sfFullscreen | sfClose,
+    mode.width = 1920;
+    mode.height = 1080;
+    window = sfRenderWindow_create(mode, "My_Radar", sfClose,
         NULL);
     sfRenderWindow_setFramerateLimit(window, FRAMERATE);
     return window;
