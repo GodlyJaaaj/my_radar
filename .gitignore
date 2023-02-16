@@ -1,0 +1,8 @@
+*.out
+*.txt
+*.pdf
+*.log
+.vscode
+.idea
+vgcore.*
+*.o
