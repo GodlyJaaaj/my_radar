@@ -1,30 +1,44 @@
 ##
-## EPITECH PROJECT, 2022
-## -----
+## EPITECH PROJECT, 2023
+## my_radar
 ## File description:
 ## Makefile
 ##
 
-SRC = $(shell find ./src/ -type f -name '*.c') \
+rwildcard=$(wildcard $1$2) $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2))
 
-OBJ = $(SRC:.c=.o)
+CC				:= gcc
+CFLAGS 			:= -c -Wall
+LDFLAGS 		:= -lcsfml-graphics -lcsfml-window -lcsfml-system -lm
+DEBUG_FLAGS		:= -g -g3
+TESTS_FLAGS 	:= --coverage -lcriterion
+INCLUDES 		:= -I./includes
+EXECUTABLE 		:= my_radar
+TEST			:= unit_tests
 
-NAME = 'my_radar'
+SOURCES_FILES 	:= $(call rwildcard,src/,*.c)
+OBJECTS_FILES 	:= $(SOURCES_FILES:.c=.o)
 
-all: $(NAME)
+all: $(SOURCES_FILES) $(EXECUTABLE)
 
-$(NAME):
-	@gcc $(SRC) -lcsfml-graphics -lcsfml-window\
-				 -lcsfml-system -lcsfml-audio -lcsfml-network -lm\
-	 -Wall -Wno-unused-variable -Wno-unused-parameter\
-	 -Wextra -Iinclude -o $(NAME) -g
+$(EXECUTABLE): $(OBJECTS_FILES)
+	$(CC) $(LDFLAGS) $(OBJECTS_FILES) -o $@
+
+.c.o:
+	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
 
 clean:
-	@rm -f $(OBJ)
+	rm -f $(OBJECTS_FILES)
+	rm -f $(OBJECTS_LIB_FILES)
 
-fclean: clean
-	@rm -f $(NAME)
+fclean: clean clean_tests
+	rm -f $(EXECUTABLE)
+	rm -f test_$(EXECUTABLE)
+
+debug: LDFLAGS += $(DEBUG_FLAGS)
+debug: CFLAGS += $(DEBUG_FLAGS)
+debug: $(EXECUTABLE)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean clean_tests tests_run coverage debug re
