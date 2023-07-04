@@ -11,7 +11,6 @@ CC				:= gcc
 CFLAGS 			:= -c -Wall
 LDFLAGS 		:= -lcsfml-graphics -lcsfml-window -lcsfml-system -lm
 DEBUG_FLAGS		:= -g -g3
-TESTS_FLAGS 	:= --coverage -lcriterion
 INCLUDES 		:= -I./includes
 EXECUTABLE 		:= my_radar
 TEST			:= unit_tests
